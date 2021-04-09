@@ -5,7 +5,7 @@ if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
 }
 
-require_once dirname(__FILE__, 3) . '/database/class-util.php';
+require_once dirname(__FILE__, 3) . '/database/class-lock.php';
 
 class Ajax {
 	static public function register_endpoints() {
@@ -16,7 +16,7 @@ class Ajax {
 	 * @attaches-to add_action('wp_ajax_sftk_mmbrs_editor_get_available_locks')
 	 */
 	static public function get_available_locks() {
-		$locks = \sofutoka\members\database\Util::get_available_locks();
+		$locks = \sofutoka\members\database\Lock::get_available_locks();
 		echo json_encode($locks);
 		wp_die();
 	}

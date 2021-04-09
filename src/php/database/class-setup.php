@@ -5,6 +5,10 @@ if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
 }
 
+require_once dirname(__FILE__) . '/class-user-to-key.php';
+require_once dirname(__FILE__) . '/class-key.php';
+require_once dirname(__FILE__) . '/class-lock.php';
+
 class Setup {
 	static private $prefix = 'sftk_mmbrs_';
 
@@ -13,10 +17,11 @@ class Setup {
 	 */
 	static public function handle_activation() {
 		// 実行が済んだら次回実行するのは避けたい
-		if (get_option(self::$prefix . 'created_database') !== true) {
+		if (get_option(self::$prefix . 'created_database') != 1) {
 			self::create_tables();
 			self::insert_default_rows();
-			update_option(self::$prefix . 'created_database', true);
+			self::give_registered_key_to_users();
+			update_option(self::$prefix . 'created_database', 1);
 		}
 	}
 
@@ -56,6 +61,7 @@ END
 		self::create_table('locks', <<<'END'
 id bigint(20) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 behavior text NOT NULL COMMENT 'An array containing the necessary information to execute behaviour.',
+name varchar(255) NOT NULL,
 label varchar(255) NOT NULL,
 protected boolean DEFAULT false COMMENT 'If protected then it cannot be deleted.'
 END
@@ -90,12 +96,13 @@ END
 				'type' => 'redirect',
 				'redirect_to' => 'wp-login.php',
 			]),
+			'name' => 'tourokuhituyou',
 			'label' => '登録が必要',
 			'protected' => true,
 		]);
 
 		self::insert_row('keys', [
-			'name' => 'tourokusumi',
+			'name' => 'tourokuzumi',
 			'label' => '登録済み',
 			'description' => '登録したユーザが与えられる鍵',
 			'starts_offset' => 0,
@@ -103,12 +110,25 @@ END
 			'protected' => true,
 		]);
 
-		// TODO make this more robust by first finding these values, instead of assuming 1
+		$registered_key = \sofutoka\members\database\Key::get_registered_key();
+		$registered_lock = \sofutoka\members\database\Lock::get_registered_lock();
 
 		self::insert_row('key_to_lock', [
-			'key_id' => 1,
-			'lock_id' => 1,
+			'key_id' => $registered_key['id'],
+			'lock_id' => $registered_lock['id'],
 			'protected' => true,
 		]);
+	}
+
+	static private function give_registered_key_to_users() {
+		global $wpdb;
+		$query = 'SELECT ID FROM wp_users;';
+		$users = $wpdb->get_results($query, ARRAY_A);
+
+		$registered_key = \sofutoka\members\database\Key::get_registered_key();
+
+		foreach ($users as $user) {
+			\sofutoka\members\database\User_To_Key::insert_record($user['ID'], $registered_key['id']);
+		}
 	}
 }

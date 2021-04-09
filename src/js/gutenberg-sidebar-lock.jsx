@@ -5,7 +5,6 @@ const { Fragment } = wp.element;
 import LockIcon from './components/icons/Lock.jsx';
 import SidebarLock from './components/SidebarLock.jsx';
 
-// Meta box
 registerPlugin('landing-page-gutenberg-template', {
   icon: LockIcon,
   render: () => (

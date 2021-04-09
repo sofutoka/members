@@ -50,6 +50,9 @@ register_uninstall_hook('members/members.php', '\sofutoka\members\database\Setup
 require_once dirname(__FILE__) . '/src/php/class-gatekeeper.php';
 add_action('wp', '\sofutoka\members\Gatekeeper::gatekeep_access');
 
+require_once dirname(__FILE__) . '/src/php/class-register.php';
+add_action('user_register', '\sofutoka\members\Register::grant_registered_key');
+
 /**
  * エディター
  */
