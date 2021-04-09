@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-transform-react-jsx": "^7.12.17",
+    "@babel/preset-env": "^7.13.10",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.26.3",
+    "webpack-cli": "^4.5.0"
+  },
+  "browserslist": [
+    ">0.25%",
+    "not ie 11",
+    "not op_mini all"
+  ],
+  "dependencies": {
+    "@wordpress/edit-post": "^3.27.1",
+    "@wordpress/icons": "^2.10.1",
+    "@wordpress/plugins": "^2.25.1",
+    "axios": "^0.21.1",
+    "qs": "^6.10.1"
+  }
+}

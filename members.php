@@ -13,6 +13,9 @@ if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
 }
 
+define('SFTK_MMBRS_ROOT_URL', plugins_url('/', __FILE__));
+define('SFTK_MMBRS_VERSION', '210405');
+
 /**
  * メニュー
  */
@@ -51,6 +54,11 @@ add_action('wp', '\sofutoka\members\Gatekeeper::gatekeep_access');
  * エディター
  */
 
-require_once dirname(__FILE__) . '/src/php/admin/class-meta-boxes.php';
-add_action('add_meta_boxes', '\sofutoka\members\admin\Meta_Boxes::add_meta_boxes');
-add_action('save_post', '\sofutoka\members\admin\Meta_Boxes::save_post_meta');
+require_once dirname(__FILE__) . '/src/php/admin/editor/class-ajax.php';
+\sofutoka\members\admin\editor\Ajax::register_endpoints();
+
+require_once dirname(__FILE__) . '/src/php/admin/editor/class-enqueue.php';
+add_action('admin_enqueue_scripts', '\sofutoka\members\admin\editor\Enqueue::enqueue_assets');
+
+require_once dirname(__FILE__) . '/src/php/admin/editor/class-meta-boxes.php';
+add_action('init', '\sofutoka\members\admin\editor\Meta_Boxes::register_meta_boxes');

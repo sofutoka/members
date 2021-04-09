@@ -24,6 +24,7 @@ class Setup {
 	 * @attaches-to register_uninstall_hook('members/members.php')
 	 */
 	static public function handle_uninstall() {
+		// TODO
 		// Drop tables
 		// https://github.com/wpsharks/s2x-payments-log/blob/master/includes/drop-tables.php
 		// https://github.com/wpsharks/s2x-payments-log/blob/master/includes/hooks/register_uninstall_hook.php
@@ -96,7 +97,7 @@ END
 		self::insert_row('keys', [
 			'name' => 'tourokusumi',
 			'label' => '登録済み',
-			'description' => '登録したユーザに与えられる鍵',
+			'description' => '登録したユーザが与えられる鍵',
 			'starts_offset' => 0,
 			'ends_offset' => -1,
 			'protected' => true,
