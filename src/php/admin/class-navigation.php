@@ -11,7 +11,7 @@ class Navigation {
 	 */
 	static public function register_menu_items() {
 		add_menu_page(
-			'メンバーズ、最初に',
+			'ソフト家のメンバーズ',
 			'メンバーズ',
 			'add_users',
 			'sftk_mmbrs',

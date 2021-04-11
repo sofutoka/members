@@ -54,7 +54,7 @@ label varchar(255),
 description text,
 starts_offset int(10) COMMENT 'Offset from moment it was acquired at which to start granting access.',
 ends_offset int(11) COMMENT 'Offset from start, -1 for no end.',
-protected boolean DEFAULT false COMMENT 'If protected then it cannot be deleted.'
+protected boolean DEFAULT false COMMENT 'If protected then it cannot be edited or deleted.'
 END
 		);
 
@@ -63,7 +63,7 @@ id bigint(20) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 behavior text NOT NULL COMMENT 'An array containing the necessary information to execute behaviour.',
 name varchar(255) NOT NULL,
 label varchar(255) NOT NULL,
-protected boolean DEFAULT false COMMENT 'If protected then it cannot be deleted.'
+protected boolean DEFAULT false COMMENT 'If protected then it cannot be edited or deleted.'
 END
 		);
 
@@ -79,7 +79,7 @@ END
 id bigint(20) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 key_id bigint(20) UNSIGNED NOT NULL,
 lock_id bigint(20) UNSIGNED NOT NULL,
-protected boolean DEFAULT false COMMENT 'If protected then it cannot be deleted.'
+protected boolean DEFAULT false COMMENT 'If protected then it cannot be edited or deleted.'
 END
 		);
 	}
@@ -104,7 +104,7 @@ END
 		self::insert_row('keys', [
 			'name' => 'tourokuzumi',
 			'label' => '登録済み',
-			'description' => '登録したユーザが与えられる鍵',
+			'description' => '登録したユーザーが自動に与えられる鍵',
 			'starts_offset' => 0,
 			'ends_offset' => -1,
 			'protected' => true,

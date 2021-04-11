@@ -7,10 +7,9 @@ const {
   SelectControl,
 } = wp.components;
 const { withDispatch } = wp.data;
-const ajaxUrl = wp.ajax.settings.url;
 
 const Sidebar = ({ setMetaFieldValue }) => {
-  const [availableLocks, setAvailableLocks] = useState([{ label: 'ロード中', value: null }]);
+  const [availableLocks, setAvailableLocks] = useState([{ label: '読み込み中', value: null }]);
   const [lockId, setLockId] = useState(null);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ const Sidebar = ({ setMetaFieldValue }) => {
 
   useEffect(async () => {
     const availableLocks = await axios.post(
-      ajaxUrl,
+      wp.ajax.settings.url,
       qs.stringify({
         action: 'sftk_mmbrs_editor_get_available_locks',
       })

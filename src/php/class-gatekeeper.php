@@ -15,8 +15,6 @@ class Gatekeeper {
 	static public function gatekeep_access() {
 		if (is_single() || is_page()) {
 			self::gatekeep_post_access();
-//		} elseif (is_page()) {
-//			self::gatekeep_page_access();
 		} else {
 			// 有料版にアップグレードの必要があります
 			// 有料版はカテゴリー、タグ、などの制限ができます
@@ -60,9 +58,5 @@ class Gatekeeper {
 				self::handle_blocked_user($lock_id);
 			}
 		}
-	}
-
-	static private function gatekeep_page_access() {
-		// TODO catgs.inc.php for reference
 	}
 }

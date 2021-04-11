@@ -2,8 +2,8 @@ const { registerPlugin } = wp.plugins;
 const { PluginDocumentSettingPanel } = wp.editPost;
 const { Fragment } = wp.element;
 
-import LockIcon from './components/icons/Lock.jsx';
-import SidebarLock from './components/SidebarLock.jsx';
+import LockIcon from './components/icons/Lock';
+import SidebarLock from './components/SidebarLock';
 
 registerPlugin('landing-page-gutenberg-template', {
   icon: LockIcon,

@@ -1,0 +1,60 @@
+$background_color: white;
+$foreground_color: #3c434a;
+$bold_foreground_color: #333;
+
+// WordPress Colors (Proposal)
+// https://codepen.io/drw158/pen/oNNarbq
+$blue20: #72aee6;
+
+#wpcontent {
+  background-color: $background_color;
+}
+
+.sftk_mmbrs {
+  color: $foreground_color;
+
+  &,
+  & p,
+  & .sftk_mmbrs.button {
+    font-size: 18px;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  p,
+  li {
+    max-width: 800px;
+  }
+}
+
+.sftk_mmbrs.button {
+}
+
+article.sftk_mmbrs {}
+
+.sftk_mmbrs.shadow {}
+
+table.sftk_mmbrs {
+  min-width: 800px;
+  max-width: 1080px;
+  margin-right: 20px;
+  border-collapse: collapse;
+
+  thead tr th {
+    border-bottom: 1px solid $blue20;
+  }
+
+  th {
+    text-align: left;
+    color: $bold_foreground_color;
+  }
+
+  th,
+  td {
+    padding: 10px 20px;
+  }
+}

@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "build": "webpack"
+    "build:js": "webpack",
+    "build:css": "node-sass --output-style compressed -o assets/css src/css"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.10",
@@ -8,6 +9,10 @@
     "@babel/plugin-transform-react-jsx": "^7.12.17",
     "@babel/preset-env": "^7.13.10",
     "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.1",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
     "webpack": "^5.26.3",
     "webpack-cli": "^4.5.0"
   },
@@ -17,10 +22,10 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@wordpress/edit-post": "^3.27.1",
-    "@wordpress/icons": "^2.10.1",
-    "@wordpress/plugins": "^2.25.1",
     "axios": "^0.21.1",
+    "classnames": "^2.3.1",
+    "humanize-duration": "^3.25.1",
+    "lodash.isnumber": "^3.0.3",
     "qs": "^6.10.1"
   }
 }

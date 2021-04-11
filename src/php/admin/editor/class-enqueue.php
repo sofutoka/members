@@ -12,7 +12,7 @@ class Enqueue {
 	static public function enqueue_assets() {
 		wp_enqueue_script(
 			'sftk-mmbrs-sidebar-lock',
-			SFTK_MMBRS_ROOT_URL . 'assets/js/gutenberg-sidebar-lock.js',
+			SFTK_MMBRS_ROOT_URL . '/assets/js/gutenberg-sidebar-lock.js',
 			[
 				'wp-blocks',
 				'wp-element',

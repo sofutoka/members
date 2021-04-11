@@ -24,4 +24,10 @@ AND sftk_mmbrs_user_to_key.user_id = %s;',
 		);
 		return $wpdb->get_results($query, ARRAY_A);
 	}
+
+	static public function get_available_keys() {
+		global $wpdb;
+		$query = 'SELECT * FROM sftk_mmbrs_keys;';
+		return $wpdb->get_results($query, ARRAY_A);
+	}
 }
