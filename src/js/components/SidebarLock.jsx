@@ -19,21 +19,23 @@ const Sidebar = ({ setMetaFieldValue }) => {
     }
   }, []);
 
-  useEffect(async () => {
-    const availableLocks = await axios.post(
-      wp.ajax.settings.url,
-      qs.stringify({
-        action: 'sftk_mmbrs_editor_get_available_locks',
-      })
-    );
-    let dropdownOptions = [{ label: 'ロックなし', value: '__DISABLED__' }];
-    dropdownOptions = dropdownOptions.concat(
-      availableLocks.data.map(({ id, label }) => ({
-        label: 'ロック：' + label,
-        value: id + '',
-      }))
-    );
-    setAvailableLocks(dropdownOptions);
+  useEffect(() => {
+    (async () => {
+      const availableLocks = await axios.post(
+        wp.ajax.settings.url,
+        qs.stringify({
+          action: 'sftk_mmbrs_editor_get_available_locks',
+        })
+      );
+      let dropdownOptions = [{ label: 'ロックなし', value: '__DISABLED__' }];
+      dropdownOptions = dropdownOptions.concat(
+        availableLocks.data.map(({ id, label }) => ({
+          label: 'ロック：' + label,
+          value: id + '',
+        }))
+      );
+      setAvailableLocks(dropdownOptions);
+    })();
   }, []);
 
   const changeSetting = value => {
