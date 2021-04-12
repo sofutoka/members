@@ -21,8 +21,12 @@ class Lock {
 
 	static public function get_available_locks() {
 		global $wpdb;
-		$query = 'SELECT id, label FROM sftk_mmbrs_locks;';
-		return $wpdb->get_results($query, ARRAY_A);
+		$query = 'SELECT * FROM sftk_mmbrs_locks;';
+		$result = $wpdb->get_results($query, ARRAY_A);
+		return array_map(function ($row) {
+			$row['behavior'] = unserialize($row['behavior']);
+			return $row;
+		}, $result);
 	}
 
 	static public function get_registered_lock() {

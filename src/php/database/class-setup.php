@@ -104,7 +104,7 @@ END
 		self::insert_row('keys', [
 			'name' => 'tourokuzumi',
 			'label' => '登録済み',
-			'description' => '登録したユーザーが自動に与えられる鍵',
+			'description' => '登録したユーザーが自動に与えられるカギ',
 			'starts_offset' => 0,
 			'ends_offset' => -1,
 			'protected' => true,

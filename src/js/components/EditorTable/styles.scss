@@ -1,0 +1,28 @@
+$background_color: white;
+$foreground_color: #3c434a;
+$bold_foreground_color: #333;
+
+// WordPress Colors (Proposal)
+// https://codepen.io/drw158/pen/oNNarbq
+$blue20: #72aee6;
+
+table.sftk_mmbrs {
+  min-width: 800px;
+  max-width: 1080px;
+  margin-right: 20px;
+  border-collapse: collapse;
+
+  thead tr th {
+    border-bottom: 1px solid $blue20;
+  }
+
+  th {
+    text-align: left;
+    color: $bold_foreground_color;
+  }
+
+  th,
+  td {
+    padding: 10px 20px;
+  }
+}

@@ -25,6 +25,20 @@ class Enqueue {
 				SFTK_MMBRS_VERSION,
 				true
 			);
+			wp_enqueue_script(
+				'sftk-mmbrs-admin-locks-editor',
+				SFTK_MMBRS_ROOT_URL . '/assets/js/admin-locks-editor.js',
+				[
+					'wp-blocks',
+					'wp-element',
+					'wp-editor',
+					'wp-plugins',
+					'wp-edit-post',
+					'wp-data',
+				],
+				SFTK_MMBRS_VERSION,
+				true
+			);
 
 			wp_register_style(
 				'sftk-mmbrs-admin-main-css',

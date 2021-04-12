@@ -14,7 +14,7 @@ if (!defined('WPINC')) {
 	<a class="sftk_mmbrs button" href="<?php echo admin_url('/edit.php?post_type=page&sftk_mmbrs_tour=1'); ?>">ツアーを始める</a>
 	-->
 
-	<p>メンバーズはウェブサイトのお客様のコンテンツのアクセスを制限するためのプラグインです。無料版を使って登録していない人のアクセスの制限ができます。有料版を使ったら（プロ版）コンテンツを売ることが可能になります。</p>
+	<p>メンバーズはウェブサイトのお客様のコンテンツのアクセスを制限するためのプラグインです。無料版では、会員のみが見れるよう設定が可能です。さらにプロ版では、コンテンツを有料で販売することが可能です。</p>
 	
 	<p>機能の簡単な説明は以下のポイントです。</p>
 	
@@ -28,5 +28,6 @@ if (!defined('WPINC')) {
 		<li>TODO ユーザーのカギ（自分のも含めて）はユーザーのテーブルで設定できます。</li>
 	</ul>
 
+	<?php require dirname(__FILE__) . '/_keys-editor.php'; ?>
 	<?php require dirname(__FILE__) . '/_locks-editor.php'; ?>
 </div>
