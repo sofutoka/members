@@ -17,6 +17,13 @@ class Ajax {
 	 */
 	static public function get_available_locks() {
 		$locks = \sofutoka\members\database\Lock::get_available_locks();
+		$locks = array_map(function ($row) {
+			$new_row = [
+				'id' => $row['id'],
+				'label' => $row['label'],
+			];
+			return $new_row;
+		}, $locks);
 		echo json_encode($locks);
 		wp_die();
 	}

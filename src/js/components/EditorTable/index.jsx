@@ -1,16 +1,17 @@
 import humanizeDuration from 'humanize-duration';
 import _isPlainObject from 'lodash.isplainobject';
+import PropTypes from 'prop-types';
 
 import Loading from '../Loading';
 import styles from './styles.scss';
 
-export default ({
+const EditorTable = ({
   title,
   description,
   columnsOrder,
   columnLabels,
-  numberColumns,
-  isLoading,
+  numberColumns = [],
+  isLoading = true,
   data,
 }) => {
   return (
@@ -68,3 +69,15 @@ export default ({
     </article>
   );
 };
+
+EditorTable.propTypes = {
+  title: PropTypes.node.isRequired,
+  description: PropTypes.node.isRequired,
+  columnsOrder: PropTypes.arrayOf(PropTypes.string).isRequired,
+  columnLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  numberColumns: PropTypes.arrayOf(PropTypes.string),
+  isLoading: PropTypes.bool,
+  data: PropTypes.array,
+};
+
+export default EditorTable;

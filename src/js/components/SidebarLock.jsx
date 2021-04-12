@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import qs from 'qs';
 
@@ -10,7 +11,7 @@ const { withDispatch } = wp.data;
 
 const Sidebar = ({ setMetaFieldValue }) => {
   const [availableLocks, setAvailableLocks] = useState([{ label: '読み込み中', value: null }]);
-  const [lockId, setLockId] = useState(null);
+  const [lockId, setLockId] = useState('');
 
   useEffect(() => {
     const { _sftk_mmbrs_lock_id } = wp.data.select('core/editor').getEditedPostAttribute('meta');
@@ -55,6 +56,10 @@ const Sidebar = ({ setMetaFieldValue }) => {
       </label>
     </PanelRow>
   );
+};
+
+Sidebar.propTypes = {
+  setMetaFieldValue: PropTypes.func.isRequired,
 };
 
 export default withDispatch(dispatch => ({
