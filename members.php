@@ -69,3 +69,16 @@ add_action('admin_enqueue_scripts', '\sofutoka\members\admin\editor\Enqueue::enq
 
 require_once dirname(__FILE__) . '/src/php/admin/editor/class-meta-boxes.php';
 add_action('init', '\sofutoka\members\admin\editor\Meta_Boxes::register_meta_boxes');
+
+/**
+ * プロフィール
+ */
+
+require_once dirname(__FILE__) . '/src/php/admin/profile/class-ajax.php';
+\sofutoka\members\admin\profile\Ajax::register_endpoints();
+
+require_once dirname(__FILE__) . '/src/php/admin/profile/class-enqueue.php';
+add_action('admin_enqueue_scripts', '\sofutoka\members\admin\profile\Enqueue::enqueue_assets');
+
+require_once dirname(__FILE__) . '/src/php/admin/profile/class-edit-profile-section.php';
+add_action('edit_user_profile', '\sofutoka\members\admin\profile\Edit_Profile_Section::render_key_editor');

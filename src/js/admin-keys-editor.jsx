@@ -31,7 +31,7 @@ const KeysEditor = () => {
       columnLabels={columnLabels}
       numberColumns={numberColumns}
       isLoading={isLoading}
-      data={keys}
+      rows={keys}
     />
   );
 }

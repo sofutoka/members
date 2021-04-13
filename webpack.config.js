@@ -7,6 +7,7 @@ const config = {
     'gutenberg-sidebar-lock': path.resolve(__dirname, 'src/js/gutenberg-sidebar-lock.jsx'),
     'admin-keys-editor': path.resolve(__dirname, 'src/js/admin-keys-editor.jsx'),
     'admin-locks-editor': path.resolve(__dirname, 'src/js/admin-locks-editor.jsx'),
+    'edit-profile-keys-editor': path.resolve(__dirname, 'src/js/edit-profile-keys-editor.jsx'),
   },
 
   output: {
