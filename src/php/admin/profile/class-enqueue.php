@@ -13,7 +13,7 @@ class Enqueue {
 		if ($hook_suffix === 'user-edit.php') {
 			wp_enqueue_script(
 				'sftk-mmbrs-edit-profile-keys-editor',
-				SFTK_MMBRS_ROOT_URL . '/assets/js/edit-profile-keys-editor.js',
+				SFTK_MMBRS_ROOT_URL . '/dist/js/edit-profile-keys-editor.js',
 				[
 					'wp-blocks',
 					'wp-element',
@@ -28,7 +28,7 @@ class Enqueue {
 
 			wp_register_style(
 				'sftk-mmbrs-admin-main-css',
-				SFTK_MMBRS_ROOT_URL . '/assets/css/admin-main.css'
+				SFTK_MMBRS_ROOT_URL . '/dist/css/admin-main.css'
 			);
 			wp_enqueue_style('sftk-mmbrs-admin-main-css');
 		}

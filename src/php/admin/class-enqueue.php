@@ -10,10 +10,26 @@ class Enqueue {
 	 * @attaches-to add_action('admin_enqueue_scripts')
 	 */
 	static public function enqueue_assets($hook_suffix) {
-		if ($hook_suffix === 'toplevel_page_sftk_mmbrs') {
+		$pages_suffix = 'members_page_sftk_mmbrs_';
+		$toplevel_suffix = 'toplevel_page_sftk_mmbrs';
+
+		// グローバル
+		if (
+			$hook_suffix === $toplevel_suffix ||
+			substr($hook_suffix, 0, strlen($pages_suffix)) === $pages_suffix
+		) {
+			wp_register_style(
+				'sftk-mmbrs-admin-main-css',
+				SFTK_MMBRS_ROOT_URL . '/dist/css/admin-main.css'
+			);
+			wp_enqueue_style('sftk-mmbrs-admin-main-css');
+		}
+
+		// ロックとカギの設定
+		if ($hook_suffix === $pages_suffix . 'rokku_kagi_settei') {
 			wp_enqueue_script(
 				'sftk-mmbrs-admin-keys-editor',
-				SFTK_MMBRS_ROOT_URL . '/assets/js/admin-keys-editor.js',
+				SFTK_MMBRS_ROOT_URL . '/dist/js/admin-keys-editor.js',
 				[
 					'wp-blocks',
 					'wp-element',
@@ -27,7 +43,7 @@ class Enqueue {
 			);
 			wp_enqueue_script(
 				'sftk-mmbrs-admin-locks-editor',
-				SFTK_MMBRS_ROOT_URL . '/assets/js/admin-locks-editor.js',
+				SFTK_MMBRS_ROOT_URL . '/dist/js/admin-locks-editor.js',
 				[
 					'wp-blocks',
 					'wp-element',
@@ -39,12 +55,6 @@ class Enqueue {
 				SFTK_MMBRS_VERSION,
 				true
 			);
-
-			wp_register_style(
-				'sftk-mmbrs-admin-main-css',
-				SFTK_MMBRS_ROOT_URL . '/assets/css/admin-main.css'
-			);
-			wp_enqueue_style('sftk-mmbrs-admin-main-css');
 		}
 	}
 }

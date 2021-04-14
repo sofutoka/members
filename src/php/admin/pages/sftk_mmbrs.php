@@ -21,7 +21,4 @@ if (!defined('WPINC')) {
 		<li>登録されてるユーザーにはすでに「登録済み」のカギが与えられています。</li>
 		<li>ユーザーのカギ（自分のも含めて）はユーザーのテーブルで設定できます。</li>
 	</ul>
-
-	<?php require dirname(__FILE__) . '/_keys-editor.php'; ?>
-	<?php require dirname(__FILE__) . '/_locks-editor.php'; ?>
 </div>

@@ -22,8 +22,11 @@ define('SFTK_MMBRS_VERSION', '210405');
 
 require_once dirname(__FILE__) . '/src/php/admin/class-navigation.php';
 add_action('admin_menu', '\sofutoka\members\admin\Navigation::register_menu_items');
+add_action('adminmenu', '\sofutoka\members\admin\Navigation::translate_menu_items');
+
 require_once dirname(__FILE__) . '/src/php/admin/class-enqueue.php';
 add_action('admin_enqueue_scripts', '\sofutoka\members\admin\Enqueue::enqueue_assets');
+
 require_once dirname(__FILE__) . '/src/php/admin/class-ajax.php';
 \sofutoka\members\admin\Ajax::register_endpoints();
 
