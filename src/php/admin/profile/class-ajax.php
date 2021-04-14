@@ -5,8 +5,6 @@ if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
 }
 
-require_once dirname(__FILE__, 3) . '/database/class-key.php';
-
 class Ajax {
 	static public function register_endpoints() {
 		add_action('wp_ajax_sftk_mmbrs_edit_profile_get_user_keys', '\sofutoka\members\admin\profile\Ajax::get_user_keys');

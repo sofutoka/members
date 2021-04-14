@@ -5,8 +5,6 @@ if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
 }
 
-require_once dirname(__FILE__) . '/class-lock.php';
-
 class User_To_Key {
 	static public function get_records_for_user($user_id) {
 		global $wpdb;

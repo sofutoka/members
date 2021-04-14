@@ -5,10 +5,6 @@ if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
 }
 
-require_once dirname(__FILE__) . '/database/class-user.php';
-require_once dirname(__FILE__) . '/database/class-lock.php';
-require_once dirname(__FILE__) . '/class-login-page.php';
-
 class Gatekeeper {
 	/**
 	 * @attaches-to add_action('wp')

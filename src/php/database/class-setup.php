@@ -5,10 +5,6 @@ if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
 }
 
-require_once dirname(__FILE__) . '/class-user-to-key.php';
-require_once dirname(__FILE__) . '/class-key.php';
-require_once dirname(__FILE__) . '/class-lock.php';
-
 class Setup {
 	static private $prefix = 'sftk_mmbrs_';
 

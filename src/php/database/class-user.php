@@ -5,10 +5,6 @@ if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
 }
 
-require_once dirname(__FILE__) . '/class-key.php';
-require_once dirname(__FILE__) . '/class-user-to-key.php';
-require_once dirname(__FILE__) . '/class-key-to-lock.php';
-
 class User {
 	static public function user_has_key_for_lock($user_id, $lock_id) {
 		$user_to_keys = \sofutoka\members\database\User_To_Key::get_records_for_user($user_id);

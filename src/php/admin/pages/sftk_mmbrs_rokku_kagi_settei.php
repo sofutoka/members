@@ -4,7 +4,7 @@ if (!defined('WPINC')) {
 }
 ?>
 <div class="sftk_mmbrs">
-	<h1>メンバーズのロックとカギの設定</h1>
+	<h1>メンバーズ：ロックとカギの設定</h1>
 
 	<?php require dirname(__FILE__) . '/_keys-editor.php'; ?>
 	<?php require dirname(__FILE__) . '/_locks-editor.php'; ?>
