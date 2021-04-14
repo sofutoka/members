@@ -2,7 +2,7 @@
 /**
  * Plugin Name: メンバーズ
  * Plugin URI: https://sofutoka.com/members
- * Description: 登録していないお客様にコンテンツを隠す設定ができるプラグイン
+ * Description: コンテンツを見る為に登録を必要とできるプラグイン。
  * Version: 210405
  * Author: ソフト家
  * Author URI: https://sofutoka.com
@@ -82,3 +82,10 @@ add_action('admin_enqueue_scripts', '\sofutoka\members\admin\profile\Enqueue::en
 
 require_once dirname(__FILE__) . '/src/php/admin/profile/class-edit-profile-section.php';
 add_action('edit_user_profile', '\sofutoka\members\admin\profile\Edit_Profile_Section::render_key_editor');
+
+/**
+ * ログイン
+ */
+
+require_once dirname(__FILE__) . '/src/php/class-login-page.php';
+add_filter('login_message', '\sofutoka\members\Login_page::display_redirected_notice');

@@ -7,6 +7,7 @@ if (!defined('WPINC')) {
 
 require_once dirname(__FILE__) . '/database/class-user.php';
 require_once dirname(__FILE__) . '/database/class-lock.php';
+require_once dirname(__FILE__) . '/class-login-page.php';
 
 class Gatekeeper {
 	/**
@@ -33,6 +34,7 @@ class Gatekeeper {
 		switch ($lock['behavior']['type']) {
 			case 'redirect':
 				if ($lock['behavior']['redirect_to'] === 'wp-login.php') {
+					Login_Page::set_redirected_cookie();
 					auth_redirect();
 				} else {
 					// 有料版にアップグレードの必要があります
