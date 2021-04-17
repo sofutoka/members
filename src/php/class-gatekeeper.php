@@ -27,11 +27,12 @@ class Gatekeeper {
 	static private function handle_blocked_user($lock_id) {
 		$lock = \sofutoka\members\database\Lock::get_lock($lock_id);
 
+		// TODO Handle case where we got here but no lock is found
+
 		switch ($lock['behavior']['type']) {
 			case 'redirect':
 				if ($lock['behavior']['redirect_to'] === 'wp-login.php') {
-					Login_Page::set_redirected_cookie();
-					auth_redirect();
+					self::redirect_to_login();
 				} else {
 					// 有料版にアップグレードの必要があります
 					do_action('sftk_mmbrs__gatekeeper_handle_blocked_user_redirect_else', $lock);
@@ -44,17 +45,33 @@ class Gatekeeper {
 	}
 
 	static private function gatekeep_post_access() {
-		$is_locked = metadata_exists('post', get_the_ID(), '_sftk_mmbrs_lock_id');
+		$post_id = get_the_ID();
+		$is_post_locked = metadata_exists('post', $post_id, '_sftk_mmbrs_lock_id');
+		$is_locked = apply_filters('sftk_mmbrs__post_is_locked', $is_post_locked, $post_id);
 
 		if ($is_locked) {
-			$lock_id = get_metadata('post', get_the_ID(), '_sftk_mmbrs_lock_id', true);
+			$locks = [];
+			if ($is_post_locked) {
+				$locks[] = get_metadata('post', get_the_ID(), '_sftk_mmbrs_lock_id', true);
+			}
+			$locks = array_merge($locks, apply_filters('sftk_mmbrs__post_is_locked_locks', [], $post_id));
 
 			if (
+				// そもそもログインしていない場合
 				($user = self::get_current_user()) === null ||
-				!\sofutoka\members\database\User::user_has_key_for_lock($user->ID, $lock_id)
+				!empty($lock_id = \sofutoka\members\database\User::user_has_key_for_lock($user->ID, $locks))
 			) {
-				self::handle_blocked_user($lock_id);
+				if (isset($lock_id)) {
+					self::handle_blocked_user($lock_id);
+				} else {
+					self::redirect_to_login();
+				}
 			}
 		}
+	}
+
+	static private function redirect_to_login() {
+		Login_Page::set_redirected_cookie();
+		auth_redirect();
 	}
 }

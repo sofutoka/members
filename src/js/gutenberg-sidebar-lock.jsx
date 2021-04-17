@@ -4,7 +4,7 @@ const { PluginDocumentSettingPanel } = wp.editPost;
 import LockIcon from './components/icons/Lock';
 import SidebarLock from './components/SidebarLock';
 
-registerPlugin('landing-page-gutenberg-template', {
+registerPlugin('members-lock-gutenberg-template', {
   icon: LockIcon,
   render: () => (
     <PluginDocumentSettingPanel title='メンバーズロック'>
