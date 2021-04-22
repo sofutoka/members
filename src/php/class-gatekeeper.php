@@ -38,6 +38,13 @@ class Gatekeeper {
 					do_action('sftk_mmbrs__gatekeeper_handle_blocked_user_redirect_else', $lock);
 				}
 				break;
+			case 'redirect_post':
+				if ($lock['behavior']['post_id'] === 'wp-login.php') {
+					self::redirect_to_login();
+				} else {
+					// 有料版にアップグレードの必要があります
+					do_action('sftk_mmbrs__gatekeeper_handle_blocked_user_redirect_post_else', $lock);
+				}
 			default:
 				// 有料版にアップグレードの必要があります
 				do_action('sftk_mmbrs__gatekeeper_handle_blocked_user_else', $lock);
