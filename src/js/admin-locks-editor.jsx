@@ -10,13 +10,15 @@ const KeysEditor = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [locks, setLocks] = useState([]);
 
-  useEffect(async () => {
-    const result = await axios.post(
-      wp.ajax.settings.url,
-      qs.stringify({ action: 'sftk_mmbrs_get_locks' })
-    );
-    setLocks(result.data);
-    setIsLoading(false);
+  useEffect(() => {
+    (async () => {
+      const result = await axios.post(
+        wp.ajax.settings.url,
+        qs.stringify({ action: 'sftk_mmbrs_get_locks' })
+      );
+      setLocks(result.data);
+      setIsLoading(false);
+    })();
   }, []);
 
   const columnsOrder = ['name', 'label', 'behavior'];

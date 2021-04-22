@@ -26,7 +26,11 @@ class Enqueue {
 		}
 
 		// ロックとカギの設定
-		if ($hook_suffix === $pages_suffix . 'rokku_kagi_settei') {
+		if (
+			$hook_suffix === $pages_suffix . 'keys_locks_settings' &&
+			// こうすればフィルターはこのページだけに実行される
+			apply_filters('sftk_mmbrs__admin_enqueue_keys_locks_settings_scripts', true, 'sftk_mmbrs__admin_enqueue_keys_locks_settings_scripts')
+		) {
 			wp_enqueue_script(
 				'sftk-mmbrs-admin-keys-editor',
 				SFTK_MMBRS_ROOT_URL . '/dist/js/admin-keys-editor.js',

@@ -18,13 +18,13 @@ class Navigation {
 			'sftk_mmbrs',
 			'\sofutoka\members\admin\Navigation::render_page'
 		);
-		// sftk_mmbrs_rokku_kagi_settei
+		// sftk_mmbrs_keys_locks_settings
 		add_submenu_page(
 			'sftk_mmbrs',
 			'メンバーズのロックとカギの設定',
 			'ロックとカギの設定',
 			'add_users',
-			'sftk_mmbrs_rokku_kagi_settei',
+			'sftk_mmbrs_keys_locks_settings',
 			'\sofutoka\members\admin\Navigation::render_page'
 		);
 	}
@@ -42,7 +42,7 @@ class Navigation {
 	static public function translate_menu_items() {
 		echo '<script>';
 		echo 'jQuery(\'#toplevel_page_sftk_mmbrs a[href="admin.php?page=sftk_mmbrs"] .wp-menu-name\').text(\'メンバーズ\');';
-		echo 'jQuery(\'#toplevel_page_sftk_mmbrs a[href="admin.php?page=sftk_mmbrs"].wp-first-item\').text(\'メンバーズ\');';
+		echo 'jQuery(\'#toplevel_page_sftk_mmbrs a[href="admin.php?page=sftk_mmbrs"].wp-first-item\').text(\'メンバーズの説明\');';
 		echo '</script>';
 	}
 }

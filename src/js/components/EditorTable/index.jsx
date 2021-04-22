@@ -3,7 +3,7 @@ import _isPlainObject from 'lodash.isplainobject';
 import PropTypes from 'prop-types';
 
 import Loading from '../Loading';
-import CheckboxWithNetwork from '../CheckboxWithNetwork';
+import CheckboxWithNetwork from './CheckboxWithNetwork';
 import styles from './styles.scss';
 
 const EditorTable = ({
@@ -66,7 +66,7 @@ const EditorTable = ({
                     return <td key={key}>{humanizeDuration(value, { language: 'ja' })}</td>;
                   }
                 } else if (_isPlainObject(value)) {
-                  // ロックのbehavior columnという前提で
+                  // ロックのbehavior columnの前提で
                   return (
                     <td key={key}>
                       <span className="sftk_mmbrs_tag">
