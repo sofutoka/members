@@ -1,3 +1,7 @@
+/**
+ * @copyright Apache-2.0, https://fonts.google.com/icons?selected=Material+Icons
+ */
+
 export default () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

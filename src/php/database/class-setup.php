@@ -9,7 +9,7 @@ class Setup {
 	static private $prefix = 'sftk_mmbrs_';
 
 	/**
-	 * @attaches-to register_activation_hook('members/members.php')
+	 * @attaches-to register_activation_hook('sofutoka-members/sofutoka-members.php')
 	 */
 	static public function handle_activation() {
 		// 実行が済んだら次回実行するのは避けたい

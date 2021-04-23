@@ -1,12 +1,13 @@
 <?php
 /**
- * Plugin Name: メンバーズ
+ * Plugin Name: Sofutoka Members
  * Plugin URI: https://sofutoka.com/members
- * Description: コンテンツを見る為に登録を必要とできるプラグイン。
- * Version: 210405
+ * Description: 登録していないユーザーにコンテンツをブロックできるプラグイン。
+ * Version: __VERSION__
  * Author: ソフト家
  * Author URI: https://sofutoka.com
- * License: GPL2
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 if (!defined('WPINC')) {
@@ -26,7 +27,7 @@ spl_autoload_register(function ($classname) {
 });
 
 define('SFTK_MMBRS_ROOT_URL', plugins_url('', __FILE__));
-define('SFTK_MMBRS_VERSION', '210405');
+define('SFTK_MMBRS_VERSION', '__VERSION__');
 
 /**
  * メニュー
@@ -41,8 +42,8 @@ add_action('admin_enqueue_scripts', '\sofutoka\members\admin\Enqueue::enqueue_as
  * データーベース
  */
 
-register_activation_hook('members/members.php', '\sofutoka\members\database\Setup::handle_activation');
-register_uninstall_hook('members/members.php', '\sofutoka\members\database\Setup::handle_uninstall');
+register_activation_hook('sofutoka-members/sofutoka-members.php', '\sofutoka\members\database\Setup::handle_activation');
+register_uninstall_hook('sofutoka-members/sofutoka-members.php', '\sofutoka\members\database\Setup::handle_uninstall');
 
 /**
  * アクセス

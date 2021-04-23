@@ -1,3 +1,7 @@
+/**
+ * @copyright Apache-2.0, https://fonts.google.com/icons?selected=Material+Icons
+ */
+
 export default () => (
   <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
     <path d="M0 0h24v24H0z" fill="none" />
