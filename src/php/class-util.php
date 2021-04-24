@@ -1,5 +1,5 @@
 <?php
-namespace \sofutoka\members;
+namespace sofutoka\members;
 
 if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
