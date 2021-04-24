@@ -30,7 +30,7 @@ class Navigation {
 	}
 
 	static public function render_page() {
-		$page_id = $_GET['page'];
+		$page_id = sanitize_key($_GET['page']);
 		require_once dirname(__FILE__) . '/pages/' . $page_id . '.php';
 	}
 

@@ -5,6 +5,8 @@ if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
 }
 
+use \sofutoka\members\Util;
+
 class Ajax {
 	static public function register_endpoints() {
 		add_action('wp_ajax_sftk_mmbrs_edit_profile_get_user_keys', '\sofutoka\members\admin\profile\Ajax::get_user_keys');
@@ -15,8 +17,9 @@ class Ajax {
 	 * @attaches-to add_action('wp_ajax_sftk_mmbrs_edit_profile_get_user_keys')
 	 */
 	static public function get_user_keys() {
+		$user_id = Util::sanitize_id($_POST['user_id']);
 		$all_keys = \sofutoka\members\database\Key::get_available_keys();
-		$user_keys = \sofutoka\members\database\Key::get_user_keys($_POST['user_id']);
+		$user_keys = \sofutoka\members\database\Key::get_user_keys($user_id);
 
 		$result_keys = array_map(function ($key) use ($user_keys) {
 			$key['checked'] = false;
@@ -31,7 +34,7 @@ class Ajax {
 
 		$result = [
 			'data' => $result_keys,
-			'set_key_access_nonce' => wp_create_nonce('set_key_access_user_' . $_POST['user_id']),
+			'set_key_access_nonce' => wp_create_nonce('set_key_access_user_' . $user_id),
 		];
 
 		echo json_encode($result);
@@ -42,18 +45,21 @@ class Ajax {
 	 * @attaches-to add_action('wp_ajax_sftk_mmbrs_edit_profile_set_key_access')
 	 */
 	static public function set_key_access() {
-		// get_user_keys()からこのnonceが来てます
-		wp_verify_nonce($_POST['nonce'], 'set_key_access_user_' . $_POST['user_id']);
+		$user_id = Util::sanitize_id($_POST['user_id']);
+		$key_id = Util::sanitize_id($_POST['key_id']);
 
-		if ($_POST['has_key'] === 'true') {
-			\sofutoka\members\database\Key::grant_user_access_to_key($_POST['user_id'], $_POST['key_id']);
+		// get_user_keys()からこのnonceが来てます
+		wp_verify_nonce($_POST['nonce'], 'set_key_access_user_' . $user_id);
+
+		if (Util::sanitize_bool($_POST['has_key'])) {
+			\sofutoka\members\database\Key::grant_user_access_to_key($user_id, $key_id);
 		} else {
-			\sofutoka\members\database\Key::remove_user_access_to_key($_POST['user_id'], $_POST['key_id']);
+			\sofutoka\members\database\Key::remove_user_access_to_key($user_id, $key_id);
 		}
 
 		echo json_encode([
 			'status' => 'ok',
-			'has_key' => $_POST['has_key'] === 'true',
+			'has_key' => Util::sanitize_bool($_POST['has_key']),
 		]);
 		wp_die();
 	}
