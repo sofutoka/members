@@ -1,6 +1,6 @@
 const path = require('path');
 
-const isProduction = process.env.ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
 const config = {
   entry: {
@@ -49,7 +49,7 @@ const config = {
 
   mode: isProduction ? 'production' : 'development',
   target: 'browserslist',
-  devtool: isProduction ? null : 'inline-source-map',
+  devtool: isProduction ? false : 'inline-source-map',
 };
 
 module.exports = config;
