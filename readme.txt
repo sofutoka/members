@@ -27,3 +27,5 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 なにか質問があれば、問題が発生したら、以下のメールアドレスに質問や問題を送りいただければサーポートします。
 
 <support@sofutoka.com>
+
+ソースコードはGitHubに載せてます。 <https://github.com/sofutoka/members>
