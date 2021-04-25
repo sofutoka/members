@@ -37,6 +37,7 @@ class Ajax {
 			'set_key_access_nonce' => wp_create_nonce('sftk_mmbrs_set_key_access_user_' . $user_id),
 		];
 
+		header('Content-Type: application/json; charset=UTF-8');
 		echo json_encode($result);
 		wp_die();
 	}
@@ -49,7 +50,7 @@ class Ajax {
 		$key_id = Util::sanitize_id($_POST['key_id']);
 
 		// get_user_keys()からこのnonceが来てます
-		wp_verify_nonce($_POST['nonce'], 'sftk_mmbrs_set_key_access_user_' . $user_id);
+		Util::verify_nonce($_POST['nonce'], 'sftk_mmbrs_set_key_access_user_' . $user_id);
 
 		if (Util::sanitize_bool($_POST['has_key'])) {
 			\sofutoka\members\database\Key::grant_user_access_to_key($user_id, $key_id);
@@ -57,6 +58,7 @@ class Ajax {
 			\sofutoka\members\database\Key::remove_user_access_to_key($user_id, $key_id);
 		}
 
+		header('Content-Type: application/json; charset=UTF-8');
 		echo json_encode([
 			'status' => 'ok',
 			'has_key' => Util::sanitize_bool($_POST['has_key']),

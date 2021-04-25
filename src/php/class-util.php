@@ -39,4 +39,16 @@ class Util {
 		$value = preg_replace('/[^0-9]/', '', $value);
 		return $value;
 	}
+
+	static public function verify_nonce($nonce, $action) {
+		if (!wp_verify_nonce($nonce, $action)) {
+			status_header(401);
+			header('Content-Type: application/json; charset=UTF-8');
+			echo json_encode([
+				'type' => 'INVALID_NONCE',
+				'message' => 'Invalid or expired nonce.',
+			]);
+			wp_die();
+		}
+	}
 }

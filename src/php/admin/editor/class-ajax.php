@@ -21,6 +21,7 @@ class Ajax {
 				'label' => $row['label'],
 			];
 		}, $locks);
+		header('Content-Type: application/json; charset=UTF-8');
 		echo json_encode($locks);
 		wp_die();
 	}

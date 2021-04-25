@@ -16,6 +16,7 @@ class Ajax {
 	 */
 	static public function get_keys() {
 		$keys = \sofutoka\members\database\Key::get_available_keys();
+		header('Content-Type: application/json; charset=UTF-8');
 		echo json_encode([
 			'create_key_nonce' => wp_create_nonce('sftk_mmbrs_create_key'),
 			'update_key_nonce' => wp_create_nonce('sftk_mmbrs_update_key'),
@@ -30,6 +31,7 @@ class Ajax {
 	 */
 	static public function get_locks() {
 		$locks = \sofutoka\members\database\Lock::get_available_locks();
+		header('Content-Type: application/json; charset=UTF-8');
 		echo json_encode([
 			'create_lock_nonce' => wp_create_nonce('sftk_mmbrs_create_lock'),
 			'update_lock_nonce' => wp_create_nonce('sftk_mmbrs_update_lock'),
