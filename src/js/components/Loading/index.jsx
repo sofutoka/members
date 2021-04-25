@@ -1,20 +1,28 @@
+import PropTypes from 'prop-types';
+
 const { useState, useEffect } = wp.element;
 
 import LoadingBackAndForth from '../LoadingBackAndForth';
 import styles from './styles.scss';
 
-export default ({ message = '', isLoading }) => {
+const Loading = ({ message = '', isLoading = true }) => {
   const [showBar, setShowBar] = useState(false);
 
-  // この仕組みは、読み込みが早ければflashを防ぐためです
+  // 読み込みが早ければflashを防ぐよう
   useEffect(() => {
-    setTimeout(() => setShowBar(true), 200);
+    let isMounted = true;
+    setTimeout(() => {
+      if (isMounted) {
+        setShowBar(true);
+      }
+    }, 200);
+    return () => { isMounted = false; };
   }, []);
 
   if (isLoading) {
     return (
       <div className="sftk_mmbrs is_loading">
-        <p>{message}読み込み中</p>
+        <p>{message}</p>
         {showBar && <LoadingBackAndForth />}
       </div>
     );
@@ -22,3 +30,10 @@ export default ({ message = '', isLoading }) => {
     return null;
   }
 }
+
+Loading.propTypes = {
+  message: PropTypes.node.isRequired,
+  isLoading: PropTypes.bool,
+};
+
+export default Loading;
