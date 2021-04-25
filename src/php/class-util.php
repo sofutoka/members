@@ -16,13 +16,10 @@ class Util {
 		if (is_string($value)) {
 			$value = strtolower($value);
 		}
-		switch ($value) {
-			case 'true':
-			case true:
-				return true;
-			case 'false':
-			case false:
-				return false;
+		if ($value === 'true' || $value === true) {
+			return true;
+		} elseif ($value === 'false' || $value === false) {
+			return false;
 		}
 	}
 
