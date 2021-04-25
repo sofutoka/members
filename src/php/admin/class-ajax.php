@@ -16,7 +16,12 @@ class Ajax {
 	 */
 	static public function get_keys() {
 		$keys = \sofutoka\members\database\Key::get_available_keys();
-		echo json_encode($keys);
+		echo json_encode([
+			'create_key_nonce' => wp_create_nonce('sftk_mmbrs_create_key'),
+			'update_key_nonce' => wp_create_nonce('sftk_mmbrs_update_key'),
+			'delete_key_nonce' => wp_create_nonce('sftk_mmbrs_delete_key'),
+			'keys' => $keys,
+		]);
 		wp_die();
 	}
 
@@ -24,8 +29,13 @@ class Ajax {
 	 * @attaches-to add_action('wp_ajax_sftk_mmbrs_get_locks')
 	 */
 	static public function get_locks() {
-		$keys = \sofutoka\members\database\Lock::get_available_locks();
-		echo json_encode($keys);
+		$locks = \sofutoka\members\database\Lock::get_available_locks();
+		echo json_encode([
+			'create_lock_nonce' => wp_create_nonce('sftk_mmbrs_create_lock'),
+			'update_lock_nonce' => wp_create_nonce('sftk_mmbrs_update_lock'),
+			'delete_lock_nonce' => wp_create_nonce('sftk_mbbrs_delete_lock'),
+			'locks' => $locks,
+		]);
 		wp_die();
 	}
 }

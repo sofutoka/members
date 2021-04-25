@@ -16,7 +16,7 @@ const KeysEditor = () => {
         wp.ajax.settings.url,
         qs.stringify({ action: 'sftk_mmbrs_get_keys' })
       );
-      setKeys(result.data);
+      setKeys(result.data.keys);
       setIsLoading(false);
     })();
   }, []);
