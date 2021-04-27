@@ -10,7 +10,10 @@ class Navigation {
 	 * @attaches-to add_action('admin_menu')
 	 */
 	static public function register_menu_items() {
+		do_action('sftk_mmbrs__navigation_before');
+
 		// sftk_mmbrs
+		do_action('sftk_mmbrs__navigation_before_welcome');
 		add_menu_page(
 			'ソフト家のメンバーズ',
 			'Members',
@@ -18,7 +21,10 @@ class Navigation {
 			'sftk_mmbrs',
 			'\sofutoka\members\admin\Navigation::render_page'
 		);
-		// sftk_mmbrs_keys_locks_settings
+		do_action('sftk_mmbrs__navigation_after_welcome');
+
+    // sftk_mmbrs_keys_locks_settings
+		do_action('sftk_mmbrs__navigation_before_keys_locks');
 		add_submenu_page(
 			'sftk_mmbrs',
 			'メンバーズのロックとカギの設定',
@@ -27,6 +33,9 @@ class Navigation {
 			'sftk_mmbrs_keys_locks_settings',
 			'\sofutoka\members\admin\Navigation::render_page'
 		);
+		do_action('sftk_mmbrs__navigation_after_keys_locks');
+
+		do_action('sftk_mmbrs__navigation_after');
 	}
 
 	static public function render_page() {
