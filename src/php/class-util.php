@@ -16,7 +16,7 @@ class Util {
 		if (is_string($value)) {
 			$value = strtolower($value);
 		}
-		if ($value === 'true' || $value === true) {
+		if ($value === 'true' || $value === true || $value === 'on') {
 			return true;
 		} elseif ($value === 'false' || $value === false) {
 			return false;
