@@ -1,5 +1,5 @@
 <?php
-namespace sofutoka\members\admin\profile;
+namespace Sofutoka\Members\Admin\Profile;
 
 if (!defined('WPINC')) {
 	exit('Do not access this file directly.');

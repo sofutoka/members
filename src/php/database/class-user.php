@@ -1,5 +1,5 @@
 <?php
-namespace sofutoka\members\database;
+namespace Sofutoka\Members\Database;
 
 if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
@@ -7,10 +7,10 @@ if (!defined('WPINC')) {
 
 class User {
 	static public function user_has_key_for_lock($user_id, $lock_ids) {
-		$user_to_keys = \sofutoka\members\database\User_To_Key::get_records_for_user($user_id);
+		$user_to_keys = \Sofutoka\Members\Database\User_To_Key::get_records_for_user($user_id);
 
 		foreach ($lock_ids as $lock_id) {
-			$keys_to_lock = \sofutoka\members\database\Key_To_Lock::get_records_for_lock($lock_id);
+			$keys_to_lock = \Sofutoka\Members\Database\Key_To_Lock::get_records_for_lock($lock_id);
 
 			// 条件を満たさないkeysを外す形で進みたいと思います
 
@@ -23,7 +23,7 @@ class User {
 				// これで少なくとも即アウトではないと判明しました
 				// もっと細かく確認したいと思います
 
-				$keys = \sofutoka\members\database\Key::get_user_keys($user_id);
+				$keys = \Sofutoka\Members\Database\Key::get_user_keys($user_id);
 				$keys = array_filter($keys, function ($key) use ($valid_keys) {
 					return in_array((int) $key['id'], $valid_keys);
 				});

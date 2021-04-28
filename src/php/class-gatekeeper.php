@@ -1,5 +1,5 @@
 <?php
-namespace sofutoka\members;
+namespace Sofutoka\Members;
 
 if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
@@ -25,7 +25,7 @@ class Gatekeeper {
 	}
 
 	static private function handle_blocked_user($lock_id) {
-		$lock = \sofutoka\members\database\Lock::get_lock($lock_id);
+		$lock = \Sofutoka\Members\Database\Lock::get_lock($lock_id);
 
 		// TODO Handle case where we got here but no lock is found
 
@@ -66,7 +66,7 @@ class Gatekeeper {
 			if (
 				// そもそもログインしていない場合
 				($user = self::get_current_user()) === null ||
-				!empty($lock_id = \sofutoka\members\database\User::user_has_key_for_lock($user->ID, $locks))
+				!empty($lock_id = \Sofutoka\Members\Database\User::user_has_key_for_lock($user->ID, $locks))
 			) {
 				if (isset($lock_id)) {
 					self::handle_blocked_user($lock_id);

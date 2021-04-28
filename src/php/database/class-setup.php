@@ -1,5 +1,5 @@
 <?php
-namespace sofutoka\members\database;
+namespace Sofutoka\Members\Database;
 
 if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
@@ -106,8 +106,8 @@ END
 			'protected' => true,
 		]);
 
-		$registered_key = \sofutoka\members\database\Key::get_registered_key();
-		$registered_lock = \sofutoka\members\database\Lock::get_registered_lock();
+		$registered_key = \Sofutoka\Members\Database\Key::get_registered_key();
+		$registered_lock = \Sofutoka\Members\Database\Lock::get_registered_lock();
 
 		self::insert_row('key_to_lock', [
 			'key_id' => $registered_key['id'],
@@ -121,10 +121,10 @@ END
 		$query = 'SELECT ID FROM wp_users;';
 		$users = $wpdb->get_results($query, ARRAY_A);
 
-		$registered_key = \sofutoka\members\database\Key::get_registered_key();
+		$registered_key = \Sofutoka\Members\Database\Key::get_registered_key();
 
 		foreach ($users as $user) {
-			\sofutoka\members\database\User_To_Key::insert_record($user['ID'], $registered_key['id']);
+			\Sofutoka\Members\Database\User_To_Key::insert_record($user['ID'], $registered_key['id']);
 		}
 	}
 }

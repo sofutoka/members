@@ -1,5 +1,5 @@
 <?php
-namespace sofutoka\members\admin;
+namespace Sofutoka\Members\Admin;
 
 if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
@@ -19,7 +19,7 @@ class Navigation {
 			'Members',
 			'add_users',
 			'sftk_mmbrs',
-			'\sofutoka\members\admin\Navigation::render_page'
+			'\Sofutoka\Members\Admin\Navigation::render_page'
 		);
 		do_action('sftk_mmbrs__navigation_after_welcome');
 
@@ -31,7 +31,7 @@ class Navigation {
 			'ロックとカギの設定',
 			'add_users',
 			'sftk_mmbrs_keys_locks_settings',
-			'\sofutoka\members\admin\Navigation::render_page'
+			'\Sofutoka\Members\Admin\Navigation::render_page'
 		);
 		do_action('sftk_mmbrs__navigation_after_keys_locks');
 

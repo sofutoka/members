@@ -1,16 +1,16 @@
 <?php
-namespace sofutoka\members\admin\profile;
+namespace Sofutoka\Members\Admin\Profile;
 
 if (!defined('WPINC')) {
 	exit('Do not access this file directly.');
 }
 
-use \sofutoka\members\Util;
+use \Sofutoka\Members\Util;
 
 class Ajax {
 	static public function register_endpoints() {
-		add_action('wp_ajax_sftk_mmbrs_edit_profile_get_user_keys', '\sofutoka\members\admin\profile\Ajax::get_user_keys');
-		add_action('wp_ajax_sftk_mmbrs_edit_profile_set_key_access', '\sofutoka\members\admin\profile\Ajax::set_key_access');
+		add_action('wp_ajax_sftk_mmbrs_edit_profile_get_user_keys', '\Sofutoka\Members\Admin\Profile\Ajax::get_user_keys');
+		add_action('wp_ajax_sftk_mmbrs_edit_profile_set_key_access', '\Sofutoka\Members\Admin\Profile\Ajax::set_key_access');
 	}
 
 	/**
@@ -18,8 +18,8 @@ class Ajax {
 	 */
 	static public function get_user_keys() {
 		$user_id = Util::sanitize_id($_POST['user_id']);
-		$all_keys = \sofutoka\members\database\Key::get_available_keys();
-		$user_keys = \sofutoka\members\database\Key::get_user_keys($user_id);
+		$all_keys = \Sofutoka\Members\Database\Key::get_available_keys();
+		$user_keys = \Sofutoka\Members\Database\Key::get_user_keys($user_id);
 
 		$result_keys = array_map(function ($key) use ($user_keys) {
 			$key['checked'] = false;
@@ -53,9 +53,9 @@ class Ajax {
 		Util::verify_nonce($_POST['nonce'], 'sftk_mmbrs_set_key_access_user_' . $user_id);
 
 		if (Util::sanitize_bool($_POST['has_key'])) {
-			\sofutoka\members\database\Key::grant_user_access_to_key($user_id, $key_id);
+			\Sofutoka\Members\Database\Key::grant_user_access_to_key($user_id, $key_id);
 		} else {
-			\sofutoka\members\database\Key::remove_user_access_to_key($user_id, $key_id);
+			\Sofutoka\Members\Database\Key::remove_user_access_to_key($user_id, $key_id);
 		}
 
 		header('Content-Type: application/json; charset=UTF-8');
