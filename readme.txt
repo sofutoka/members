@@ -1,10 +1,11 @@
-=== Sofutoka Members ===
+=== メンバーズ：会員のみコンテンツ ===
 Contributors: eduan
 Tags: 会員, 登録, メンバー, メンバーズ, ecommerce, 通販
 Version: __VERSION__
 Stable tag: __VERSION__
+Requires at least: 5.7
 Tested up to: 5.7
-Requires PHP: 7.2
+Requires PHP: 7.4
 Author: ソフト家
 Author URI: https://sofutoka.com
 License: GPLv2 or later
