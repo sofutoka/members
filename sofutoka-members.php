@@ -69,6 +69,7 @@ add_action('init', '\Sofutoka\Members\Admin\Editor\Meta_Boxes::register_meta_box
 \Sofutoka\Members\Admin\Profile\Ajax::register_endpoints();
 add_action('admin_enqueue_scripts', '\Sofutoka\Members\Admin\Profile\Enqueue::enqueue_assets');
 add_action('edit_user_profile', '\Sofutoka\Members\Admin\Profile\Edit_Profile_Section::render_key_editor');
+add_action('show_user_profile', '\Sofutoka\Members\Admin\Profile\Edit_Profile_Section::render_key_editor');
 
 /**
  * ログイン
