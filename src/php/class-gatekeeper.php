@@ -59,7 +59,8 @@ class Gatekeeper {
 
 	static private function gatekeep_post_access() {
 		$post_id = get_the_ID();
-		$has_lock = metadata_exists('post', $post_id, '_sftk_mmbrs_lock_id');
+		$post_lock_id = get_metadata('post', get_the_ID(), '_sftk_mmbrs_lock_id', true);
+		$has_lock = $post_lock_id !== '' && $post_lock_id !== '__DISABLED__';
 		$is_locked = apply_filters('sftk_mmbrs__post_is_locked', $has_lock, $post_id);
 
 		if ($is_locked) {
