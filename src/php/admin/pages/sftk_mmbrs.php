@@ -21,4 +21,10 @@ if (!defined('WPINC')) {
 		<li>登録されてるユーザーにはすでに「登録済み」のカギが与えられています。</li>
 		<li>ユーザーのカギ（自分のも含めて）はユーザーのテーブルで設定できます。</li>
 	</ul>
+
+	<p>なにか質問があれば、問題が発生したら、フィードバックがあれば、以下のメールアドレスに質問や問題を送りいただければサーポートします。</p>
+
+	<p><a href="mailto:support@sofutoka.com">support@sofutoka.com</a></p>
+
+	<p>ソースコードはGitHubに載せてます。<a href="https://github.com/sofutoka/members">https://github.com/sofutoka/members</a></p>
 </div>
