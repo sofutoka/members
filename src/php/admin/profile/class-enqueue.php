@@ -11,8 +11,8 @@ class Enqueue {
 	 */
 	static public function enqueue_assets($hook_suffix) {
 		if (
-			$hook_suffix === 'user-edit.php' ||
-			($hook_suffix === 'profile.php' && current_user_can('add_users'))
+			current_user_can('add_users') &&
+			($hook_suffix === 'user-edit.php' || $hook_suffix === 'profile.php')
 		) {
 			wp_enqueue_script(
 				'sftk-mmbrs-edit-profile-keys-editor',
