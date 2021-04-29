@@ -17,7 +17,7 @@ const EditorTable = ({
   nonce,
   userId,
 }) => {
-  const displayCheckboxes = rows.find(a => a.checked) !== undefined;
+  const displayCheckboxes = rows.find(a => a.checked !== undefined) !== undefined;
 
   return (
     <article className="sftk_mmbrs">
