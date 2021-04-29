@@ -38,7 +38,9 @@ class Gatekeeper {
 		switch ($lock['behavior']['type']) {
 			case 'redirect':
 				if ($lock['behavior']['redirect_to'] === 'wp-login.php') {
-					self::redirect_to_login();
+					// カギないのにログインにリダイレクトしたら無限ループに入っちゃうか再ログイン
+					// を強制する選択肢だから、コンテンツがそもそも存在しない様に扱う。
+					self::redirect_to_404();
 				} else {
 					// 有料版にアップグレードの必要があります
 					do_action('sftk_mmbrs__gatekeeper_handle_blocked_user_redirect_else', $lock);
@@ -46,7 +48,8 @@ class Gatekeeper {
 				break;
 			case 'redirect_post':
 				if ($lock['behavior']['post_id'] === 'wp-login.php') {
-					self::redirect_to_login();
+					// 以上と同じく。
+					self::redirect_to_404();
 				} else {
 					// 有料版にアップグレードの必要があります
 					do_action('sftk_mmbrs__gatekeeper_handle_blocked_user_redirect_post_else', $lock);
@@ -84,6 +87,15 @@ class Gatekeeper {
 				}
 			}
 		}
+	}
+
+	static private function redirect_to_404() {
+		global $wp_query;
+		$wp_query->set_404();
+		status_header(404);
+		get_template_part(404);
+		// あえてwp_die()を使っていない
+		exit();
 	}
 
 	static private function redirect_to_login() {
