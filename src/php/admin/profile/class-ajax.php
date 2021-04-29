@@ -13,11 +13,31 @@ class Ajax {
 		add_action('wp_ajax_sftk_mmbrs_edit_profile_set_key_access', '\Sofutoka\Members\Admin\Profile\Ajax::set_key_access');
 	}
 
+	static private function get_user_id($user_id = '') {
+		if ($user_id === '') {
+			$user_id = self::get_profile_user_id();
+		}
+		if ($user_id === '') {
+			Util::throw_ajax_error(400, 'BAD_REQUEST', 'Couldn\'t find or infer a user ID.');
+		} else {
+			return $user_id;
+		}
+	}
+
+	static private function get_profile_user_id(): string {
+		$parsed_url = parse_url($_SERVER['HTTP_REFERER']);
+		if (strpos($parsed_url['path'], 'profile.php') !== false) {
+			return get_current_user_id();
+		} else {
+			return '';
+		}
+	}
+
 	/**
 	 * @attaches-to add_action('wp_ajax_sftk_mmbrs_edit_profile_get_user_keys')
 	 */
 	static public function get_user_keys() {
-		$user_id = Util::sanitize_id($_POST['user_id']);
+		$user_id = self::get_user_id(Util::sanitize_id($_POST['user_id']));
 		$all_keys = \Sofutoka\Members\Database\Key::get_available_keys();
 		$user_keys = \Sofutoka\Members\Database\Key::get_user_keys($user_id);
 
@@ -46,7 +66,7 @@ class Ajax {
 	 * @attaches-to add_action('wp_ajax_sftk_mmbrs_edit_profile_set_key_access')
 	 */
 	static public function set_key_access() {
-		$user_id = Util::sanitize_id($_POST['user_id']);
+		$user_id = self::get_user_id(Util::sanitize_id($_POST['user_id']));
 		$key_id = Util::sanitize_id($_POST['key_id']);
 
 		// get_user_keys()からこのnonceが来てます

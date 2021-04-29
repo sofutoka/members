@@ -48,4 +48,14 @@ class Util {
 			wp_die();
 		}
 	}
+	static public function throw_ajax_error($status, $type, $message) {
+		status_header($status);
+		header('Content-Type: application/json; charset=UTF-8');
+		echo json_encode([
+			'type' => $type,
+			'message' => $message,
+		]);
+		wp_die();
+	}
+
 }
