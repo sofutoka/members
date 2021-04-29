@@ -42,6 +42,13 @@ class Util {
 			self::throw_ajax_error(403, 'INVALID_NONCE', 'Invalid or expired nonce.');
 		}
 	}
+
+	static public function verify_capability($capability = 'add_users') {
+		if (!current_user_can($capability)) {
+			self::throw_ajax_error(403, 'FORBIDDEN', 'You are not allowed to call this endpoint.');
+		}
+	}
+
 	static public function throw_ajax_error($status, $type, $message) {
 		status_header($status);
 		header('Content-Type: application/json; charset=UTF-8');

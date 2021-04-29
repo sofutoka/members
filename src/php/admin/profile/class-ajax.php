@@ -37,6 +37,7 @@ class Ajax {
 	 * @attaches-to add_action('wp_ajax_sftk_mmbrs_edit_profile_get_user_keys')
 	 */
 	static public function get_user_keys() {
+		Util::verify_capability();
 		$user_id = self::get_user_id(Util::sanitize_id($_POST['user_id']));
 		$all_keys = \Sofutoka\Members\Database\Key::get_available_keys();
 		$user_keys = \Sofutoka\Members\Database\Key::get_user_keys($user_id);
@@ -68,6 +69,7 @@ class Ajax {
 	 * @attaches-to add_action('wp_ajax_sftk_mmbrs_edit_profile_set_key_access')
 	 */
 	static public function set_key_access() {
+		Util::verify_capability();
 		$user_id = self::get_user_id(Util::sanitize_id($_POST['user_id']));
 		$key_id = Util::sanitize_id($_POST['key_id']);
 
