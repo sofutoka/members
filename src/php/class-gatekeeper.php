@@ -59,25 +59,27 @@ class Gatekeeper {
 
 	static private function gatekeep_post_access() {
 		$post_id = get_the_ID();
-		$is_post_locked = metadata_exists('post', $post_id, '_sftk_mmbrs_lock_id');
-		$is_locked = apply_filters('sftk_mmbrs__post_is_locked', $is_post_locked, $post_id);
+		$has_lock = metadata_exists('post', $post_id, '_sftk_mmbrs_lock_id');
+		$is_locked = apply_filters('sftk_mmbrs__post_is_locked', $has_lock, $post_id);
 
 		if ($is_locked) {
 			$locks = [];
-			if ($is_post_locked) {
+			if ($has_lock) {
 				$locks[] = get_metadata('post', get_the_ID(), '_sftk_mmbrs_lock_id', true);
 			}
 			$locks = array_merge($locks, apply_filters('sftk_mmbrs__post_is_locked_locks', [], $post_id));
 
-			if (
-				// そもそもログインしていない場合
-				($user = self::get_current_user()) === null ||
-				!empty($lock_id = \Sofutoka\Members\Database\User::user_has_key_for_lock($user->ID, $locks))
-			) {
-				if (isset($lock_id)) {
-					self::handle_blocked_user($lock_id);
-				} else {
-					self::redirect_to_login();
+			$user = self::get_current_user();
+
+			// そもそもログインしていない場合
+			if ($user === null) {
+				self::redirect_to_login();
+			} else {
+				// このページのアクセス許可がなければ
+				if (!\Sofutoka\Members\Database\User::user_has_key_for_lock($user->ID, $locks)) {
+					// とるべき行動を見つける
+					$lock_to_apply_id = apply_filters('sftk_mmbrs__post_is_locked_lock_to_apply', $locks[0], $locks);
+					self::handle_blocked_user($lock_to_apply_id);
 				}
 			}
 		}
