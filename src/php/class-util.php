@@ -39,13 +39,7 @@ class Util {
 
 	static public function verify_nonce($nonce, $action) {
 		if (!wp_verify_nonce($nonce, $action)) {
-			status_header(401);
-			header('Content-Type: application/json; charset=UTF-8');
-			echo json_encode([
-				'type' => 'INVALID_NONCE',
-				'message' => 'Invalid or expired nonce.',
-			]);
-			wp_die();
+			self::throw_ajax_error(403, 'INVALID_NONCE', 'Invalid or expired nonce.');
 		}
 	}
 	static public function throw_ajax_error($status, $type, $message) {
@@ -58,4 +52,11 @@ class Util {
 		wp_die();
 	}
 
+	static public function pick($keys, $ass_arr): array {
+		$new_ass_arr = [];
+		foreach ($keys as $key) {
+			$new_ass_arr[$key] = $ass_arr[$key];
+		}
+		return $new_ass_arr;
+	}
 }

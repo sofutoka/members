@@ -42,14 +42,16 @@ class Ajax {
 		$user_keys = \Sofutoka\Members\Database\Key::get_user_keys($user_id);
 
 		$result_keys = array_map(function ($key) use ($user_keys) {
-			$key['checked'] = false;
+			$is_checked = false;
 			foreach ($user_keys as $user_key) {
 				if ($user_key['id'] === $key['id']) {
-					$key['checked'] = true;
+					$is_checked = true;
 					break;
 				}
 			}
-			return $key;
+			$new_key = Util::pick(['id', 'name', 'label', 'description'], $key);
+			$new_key['checked'] = $is_checked;
+			return $new_key;
 		}, $all_keys);
 
 		$result = [

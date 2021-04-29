@@ -21,7 +21,13 @@ class Gatekeeper {
 	}
 
 	static private function get_current_user() {
-		return (is_user_logged_in() && is_object($user = wp_get_current_user()) && !empty($user->ID)) ? $user : null;
+		return (
+			(
+				is_user_logged_in() &&
+				is_object($user = wp_get_current_user()) &&
+				!empty($user->ID)
+			) ? $user : null
+		);
 	}
 
 	static private function handle_blocked_user($lock_id) {
