@@ -25,7 +25,7 @@ class Login_Page {
 	 */
 	static public function display_redirected_notice($message) {
 		if (isset($_COOKIE['sftk_mmbrs_redirected_to_login'])) {
-			$message .= '<p>アクセスとしていたコンテンツは登録が必要です。アカウント持ちでしたらログインしてくれたら結構です。ログインしたら自動にコンテンツにまたリダイレクトされます。</p>';
+			$message .= '<p>ログインが必要なページです。</p>';
 			return $message;
 		} else {
 			return $message;
