@@ -19,7 +19,7 @@ class Key {
 FROM sftk_mmbrs_keys
 LEFT JOIN sftk_mmbrs_user_to_key
 ON sftk_mmbrs_keys.id = sftk_mmbrs_user_to_key.key_id
-AND sftk_mmbrs_user_to_key.user_id = %s;',
+WHERE sftk_mmbrs_user_to_key.user_id = %s;',
 			$user_id
 		);
 		return $wpdb->get_results($query, ARRAY_A);
